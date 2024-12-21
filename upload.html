@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Google Drive Image</title>
+</head>
+<body>
+    <h1>Image from Google Drive</h1>
+    <img id="drive-image" alt="Image from Google Drive" width="500"/>
+
+    <h2>Audio from Google Drive</h2>
+    <audio controls>
+        <source id="track" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const fileIdImage = "1yIWpdy9iaMIUVciy6-U4njMTwa8FRs8y";  // Replace with your actual Google Drive file ID for the image
+        const fileIdAudio = "1OgSFc7mCtsnB4FW020uvcXl5IlR9Y4vZ";  // Replace with your actual Google Drive file ID for the audio
+        const apiKey = "AIzaSyBBDkcJZuSZ2Lf8QZe5ywkmKYcpAARPfwk";  // Replace with your actual API key
+
+        // Function to fetch and display the image from Google Drive
+        async function fetchDriveImage() {
+            const url = `https://www.googleapis.com/drive/v3/files/${fileIdImage}?alt=media&key=${apiKey}`;
+            document.getElementById('drive-image').src = url; 
+        }
+
+        // Function to fetch and play the audio from Google Drive
+        async function fetchDriveAudio() {
+            const url = `https://www.googleapis.com/drive/v3/files/${fileIdAudio}?alt=media&key=${apiKey}`;
+            console.log(url);
+            document.getElementById('track').src = url;
+            // try {
+            //     const response = await fetch(url);
+            //     if (!response.ok) throw new Error('Failed to fetch audio');
+
+            //     const blob = await response.blob();
+            //     const audioUrl = URL.createObjectURL(blob);
+            //     document.getElementById('track').src = audioUrl;  // Set the audio source
+            // } catch (error) {
+            //     console.error("Error fetching audio:", error);
+            // }
+        }
+
+        // Call the functions to fetch and display the image and audio
+        fetchDriveImage();
+        fetchDriveAudio();
+    </script>
+</body>
+</html>

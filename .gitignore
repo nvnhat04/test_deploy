@@ -9,7 +9,7 @@
 
 # production
 /build
-
+/uploads
 api-ggdrive-key.json
 # misc
 .DS_Store

@@ -18,8 +18,9 @@ const tokenMiddleware = {
                 }
                 return res.status(401).send({ auth: false, message: 'Failed to authenticate token.' });
             }
-            console.log(user + " is authenticated.");
+            // console.log(user + " is authenticated.");
             req.user = user;
+            // req.id = id;
             next();
         });
     }

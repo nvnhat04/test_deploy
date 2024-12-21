@@ -32,7 +32,6 @@ class MerchandiseController {
       );
       return res.status(201).json({
         message: "Merchandise created successfully",
-        merchandise_id: result.merchandise_id,
       });
     } catch (error) {
       return res.status(500).json({ message: "Error: " + error.message });
