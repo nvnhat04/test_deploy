@@ -88,7 +88,7 @@ class TrackController {
     async updateTrack(req, res) {
         try {
         const track = req.body;
-        console.log('Received track data:', track);
+        // console.log('Received track data:', track);
         TrackModel.updateTrack(track, (error, result) => {
           if (error) {
             return res.status(500).json({ message: error, success: false });

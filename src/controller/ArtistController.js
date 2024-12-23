@@ -1,5 +1,6 @@
 import ArtistModel from "../model/artist.model.js";
 import useGoogleDriveUpload from "../hooks/upload.media.js";
+import createUrl from "../hooks/createUrl.js";
 class ArtistController {
   async getTopTracks(req, res) {
     const { id: artist_id } = req.params;
@@ -63,7 +64,7 @@ class ArtistController {
           console.error("Database error:", error);
           return res.status(500).json({ error });
         }
-        return res.status(200).send(result.rows);
+        return res.status(200).send(result);
       });
     } catch (error) {
       console.error("Unexpected error:", error);
@@ -74,9 +75,11 @@ class ArtistController {
     const album = req.body;
     console.log("Album:", album);
     const cover = await useGoogleDriveUpload(req, res);
+    const url = createUrl(cover);
     // const cover = '1uPpcuN038RVhwU-IHLHSsCxG61lpCHay';
-    ArtistModel.addAlbum(album, cover, (error, result) => {
+    ArtistModel.addAlbum(album, url, (error, result) => {
       if (error) {
+        console.error("Database error:", error);
         return res.status(500).json({ error });
       }
       return res
@@ -91,7 +94,7 @@ class ArtistController {
         console.error("Database error:", error);
         return res.status(500).json({ error });
       }
-      return res.status(200).send(result.rows);
+      return res.status(200).send(result);
     });
   }
   async getAllTracksPending(req, res) {

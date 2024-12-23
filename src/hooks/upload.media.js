@@ -45,4 +45,14 @@ const useGoogleDriveUpload = async (req, res) => {
   
     return track_url;
   };
+const getGoogleDriveFile = async (fileId) => {
+    const drive = google.drive({ version: "v3", auth: await authorize() });
+    const file = await drive.files.get({
+      fileId: fileId,
+      fields: "webViewLink",
+    });
+  
+    return file.data.webViewLink;
+  }
+
 export default useGoogleDriveUpload;  
